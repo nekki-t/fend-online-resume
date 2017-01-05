@@ -32,7 +32,7 @@ var bio = {
         'Database Programming - Mongo/MySql/Postgres/Oracle/SQLServer',
         'Teaching - Computer Science for national qualifications'
     ],
-    'bioPic': 'images/picture.png'
+    'biopic': 'images/picture.png'
 };
 
 bio.display = function () {
@@ -40,7 +40,7 @@ bio.display = function () {
     //basic
     var formattedName = HTMLheaderName.replace(DATA, bio.name);
     var formattedRole = HTMLheaderRole.replace(DATA, bio.role);
-    var formattedPic = HTMLbioPic.replace(DATA, bio.bioPic);
+    var formattedPic = HTMLbioPic.replace(DATA, bio.biopic);
     var formattedWelcomeMsg = HTMLwelcomeMsg.replace(DATA, bio.welcomeMessage);
     //contacts
     var formattedMobile = HTMLcontactGeneric.replace(CONTACT, 'mobile').replace(DATA, bio.contacts.mobile);
@@ -148,7 +148,7 @@ projects.display = function () {
         $('#projects').append(HTMLprojectStart);
         target = $('.project-entry:last');
 
-        if (idx % 2 == 0) {
+        if (idx % 2 === 0) {
             target.addClass('row-even');
         } else {
             target.addClass('row-odd');
@@ -173,8 +173,9 @@ var education = {
             'name': 'Some College',
             'location': 'Tokyo',
             'dates': 'Oct 2008 - Present',
-            'degree': '',
-            'major': 'Commerce - Correspondence'
+            'degree': 'SwitchToNano-Degree',
+            'majors': ['Commerce - Correspondence', 'Finance'],
+            'url': 'http://fake.edu'
         }
     ],
     'onlineCourses': [
@@ -217,20 +218,20 @@ education.display = function () {
     education.schools.forEach(function (school) {
         eduRoot.append(HTMLschoolStart);
         var target = $('.education-entry:last');
-        target.append(HTMLschoolName.replace(DATA, school.name));
+        target.append(HTMLschoolName.replace(DATA, school.name).replace('#', school.url));
         target.append(HTMLschoolDegree.replace(DATA, school.degree));
         target.append(HTMLschoolDates.replace(DATA, school.dates));
         target.append(HTMLschoolLocation.replace(DATA, school.location));
-        target.append(HTMLschoolMajor.replace(DATA, school.major));
+        target.append(HTMLschoolMajor.replace(DATA, school.majors));
     });
     eduRoot.append(HTMLonlineClasses);
     eduRoot.append(HTMLschoolStart);
 
     education.onlineCourses.forEach(function (os) {
         var target = $('.education-entry:last'); //refresh
-        target.append(HTMLonlineTitle.replace(DATA, os.title) + HTMLonlineSchool.replace(DATA, os.school));
+        target.append(HTMLonlineTitle.replace(DATA, os.title).replace('#', os.url) + HTMLonlineSchool.replace(DATA, os.school));
         target.append(HTMLonlineDates.replace(DATA, os.dates));
-        target.append(HTMLonlineURL.replace(DATA, os.url));
+        target.append(HTMLonlineURL.replace(DATA, os.url).replace('#', os.url));
     });
 };
 
